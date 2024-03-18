@@ -415,6 +415,7 @@ impl<R: Read, W: Write> PomodoroSession<R, W> {
         while let Command::None = command {
             let mut buf = [0];
             self.stdin.read(&mut buf).unwrap();
+            sleep(Duration::from_millis(10));
             command = match buf[0] {
                 b's' => Command::Start,
                 b'r' => Command::Reset,
